@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"types": ["vite/client"],
+		"target": "esnext",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noEmit": true,
+		"strict": true,
+		"sourceMap": true,
+		"resolveJsonModule": true,
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"lib": ["esnext", "dom"],
+		"baseUrl": "./",
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"skipLibCheck": true,
+		"plugins": [{ "name": "typescript-vue-plugin" }]
+	},
+	"include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"],
+}
