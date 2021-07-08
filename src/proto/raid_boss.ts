@@ -5,10 +5,10 @@ export default class RaidBoss {
 	jp_name?: string
 	level?: number
 	image?: string
-  
+
 	constructor(input: Uint8Array) {
 		const reader = input instanceof Reader ? input : new Reader(input)
-		let end = length === undefined ? reader.len : reader.pos + length
+		const end = length === undefined ? reader.len : reader.pos + length
 		while (reader.pos < end) {
 			const tag = reader.uint32()
 			switch (tag >>> 3) {
