@@ -12,7 +12,7 @@ export type BossesMutations<S = BossesState> = {
 
 const mutations: BossesMutations = {
 	[types.GET_BOSSES](state, payload) {
-		state.bosses = payload
+		state.bosses = payload.sort((a, b) => (a.level ?? 0) - (b?.level ?? 0))
 	}
 }
 
