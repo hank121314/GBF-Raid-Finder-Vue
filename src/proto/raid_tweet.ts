@@ -19,7 +19,7 @@ export default class RaidTweet {
 	profile_image?: string
 	constructor(input: Uint8Array) {
 		const reader = input instanceof Reader ? input : new Reader(input)
-		const end = length === undefined ? reader.len : reader.pos + length
+		const end = reader.len
 		while (reader.pos < end) {
 			const tag = reader.uint32()
 			switch (tag >>> 3) {
