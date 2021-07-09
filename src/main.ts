@@ -1,7 +1,8 @@
 import { createApp } from "vue"
 import VWave from "v-wave"
-import App from "./App.vue"
+import App from "@/App.vue"
+import i18n from "@/locales"
 import store, { key } from "@/store"
 import "./index.css"
 
-createApp(App).use(store, key).use(VWave).mount("#app")
+createApp(App).use(store, key).use(i18n).use(VWave).mount("#app")
