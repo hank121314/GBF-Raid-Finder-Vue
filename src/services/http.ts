@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios"
-import settings from "@/resources/settings"
+import { baseURL } from "@/resources/settings"
 import RaidBoss from "@/proto/raid_boss"
 
 export type HttpClientInstance = {
@@ -7,13 +7,13 @@ export type HttpClientInstance = {
 }
 
 class HttpClient implements HttpClientInstance {
-	#base_url: string
+	#baseURL: string
 	#inner_client: AxiosInstance
 
-	constructor(base_url: string) {
-		this.#base_url = base_url
+	constructor(baseURL: string) {
+		this.#baseURL = baseURL
 		this.#inner_client = axios.create({
-			baseURL: this.#base_url,
+			baseURL: this.#baseURL,
 			responseType: "json"
 		})
 	}
@@ -37,4 +37,4 @@ class HttpClient implements HttpClientInstance {
 	}
 }
 
-export default new HttpClient(settings.base_url)
+export default new HttpClient(baseURL)
