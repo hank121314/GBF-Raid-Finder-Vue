@@ -1,3 +1,8 @@
-export default {
-	base_url: "https://api-gbf-raid-finder.amlispiration.com"
-} as { readonly base_url: string }
+export const baseURL: Readonly<string> =
+	"https://api-gbf-raid-finder.amlispiration.com"
+
+export enum TimeFormation {
+	Relative = "relative",
+	TwelveHour = "twelveHour",
+	TwentyFourHour = "twentyFourHour"
+}
