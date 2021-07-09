@@ -11,6 +11,15 @@
 		"plugin:vue/vue3-recommended"
 	],
 	"rules": {
-		"@typescript-eslint/ban-types": 1
+		"vue/max-attributes-per-line": [2, {
+			"singleline": 20,
+			"multiline": {
+				 "max": 1,
+				 "allowFirstLine": false
+			 }
+		}],
+		"vue/html-indent": ["error", "tab"],
+		"@typescript-eslint/ban-types": 1,
+		"vue/script-setup-uses-vars": 0
 	}
 }
