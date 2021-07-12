@@ -2,25 +2,33 @@
 	<div
 		:style="{
 			backgroundImage:
-				boss.image && showBossImage
+				boss?.image && showBossImage
 					? `linear-gradient(
 										rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)
 									),
 									url(
-										${boss.image}
+										${boss?.image}
 									)`
 					: ``
 		}"
 		class="flex items-center justify-between bg-coolGray py-2 my-2 px-4 object-cover cursor-pointer rounded bg-full bg-top-1/5"
 		@click="onClick"
 	>
-		<div class="flex flex-col justify-between">
-			<p class="text-lg text-white">
-				{{ boss.jp_name }}
+		<div class="flex flex-1 flex-col justify-between">
+			<p v-if="!loading" class="text-lg text-white">
+				{{ boss?.jp_name ?? $t("label.unknown") }}
 			</p>
-			<p class="text-sm text-white mt-1">
-				{{ boss.en_name ?? $t("label.unknown") }}
+			<p v-if="!loading" class="text-sm text-white mt-1">
+				{{ boss?.en_name ?? $t("label.unknown") }}
 			</p>
+			<div
+				v-if="loading"
+				class="w-full h-6 rounded bg-gray-500 animate-pulse"
+			/>
+			<div
+				v-if="loading"
+				class="w-3/4 h-6 mt-2 rounded bg-gray-500 animate-pulse"
+			/>
 		</div>
 		<div
 			v-if="followed"
@@ -42,9 +50,13 @@ export default defineComponent({
 	props: {
 		boss: {
 			type: Object as PropType<RaidBoss>,
-			required: true
+			default: () => ({})
 		},
 		showBossImage: {
+			type: Boolean,
+			default: false
+		},
+		loading: {
 			type: Boolean,
 			default: false
 		},
@@ -54,8 +66,9 @@ export default defineComponent({
 		}
 	},
 	emits: ["click"],
-	setup(_, { emit }) {
+	setup(props, { emit }) {
 		const onClick = () => {
+			if (props.loading) return
 			emit("click")
 		}
 
