@@ -15,7 +15,7 @@ module.exports = {
 				background: "#202128"
 			},
 			backgroundSize: {
-				"full": "100%"
+				full: "100%"
 			},
 			backgroundPosition: {
 				"top-1/5": "0% 20%"
@@ -25,6 +25,14 @@ module.exports = {
 			},
 			maxWidth: {
 				"9/10": "90%"
+			},
+			minHeight: {
+				4: "1rem",
+				5: "1.25rem"
+			},
+			minWidth: {
+				4: "1rem",
+				5: "1.25rem"
 			}
 		}
 	},
