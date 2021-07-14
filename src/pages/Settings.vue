@@ -28,7 +28,8 @@
 						class="flex w-full h-full max-w-9/10 bg-gray-800 rounded p-4 m-auto flex-col"
 					>
 						<tab v-model:selected="selected" :items="tabItems" />
-						<boss-list v-if="selected === 0" :loading="loading" />
+						<slot v-if="selected === 0" name="boss-list" />
+						<slot v-if="selected === 1" name="environment" />
 					</div>
 				</TransitionChild>
 			</div>
@@ -37,24 +38,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue"
+import { defineComponent, ref, computed } from "vue"
 import { useI18n } from "vue-i18n"
-import isEmpty from "lodash/isEmpty"
 import {
 	TransitionRoot,
 	TransitionChild,
 	Dialog,
 	DialogOverlay
 } from "@headlessui/vue"
-import { useStore } from "@/store"
-import BossesTypes from "@/store/bosses/types"
-import BossList from "@/pages/BossList.vue"
 import { Tab } from "@/components"
 
 export default defineComponent({
 	name: "Settings",
 	components: {
-		BossList,
 		Dialog,
 		DialogOverlay,
 		Tab,
@@ -67,31 +63,13 @@ export default defineComponent({
 		}
 	},
 	emits: ["close"],
-	setup(props, { emit }) {
-		const store = useStore()
+	setup(_, { emit }) {
 		const i18n = useI18n()
 		const selected = ref(0)
-		const tabItems = ref([
+		const tabItems = computed(() => [
 			{ label: i18n.t("label.follow") },
 			{ label: i18n.t("label.settings") }
 		])
-		const loading = ref(false)
-
-		watch(
-			() => props.isOpen,
-			async (newValue) => {
-				loading.value = true
-				// If user open settings and bosses list isEmpty, we should automatically fetch bosses info.
-				try {
-					if (newValue && isEmpty(store.state.bosses.bosses)) {
-						await store.dispatch(BossesTypes.GET_BOSSES, 0)
-					}
-				} catch (e) {
-					console.log(e)
-				}
-				loading.value = false
-			}
-		)
 
 		const onClose = () => {
 			emit("close")
@@ -100,7 +78,6 @@ export default defineComponent({
 		return {
 			selected,
 			tabItems,
-			loading,
 			onClose
 		}
 	}
