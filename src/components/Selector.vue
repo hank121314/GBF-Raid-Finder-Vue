@@ -1,15 +1,15 @@
 <template>
-	<Listbox v-model="selected">
+	<Listbox v-model="selectedItem">
 		<div class="w-full relative mt-1">
 			<ListboxButton
 				class="flex w-full items-center justify-between p-2 bg-darkGray rounded"
 			>
-				<p class="text-white text-lg text-center w-full">
+				<p class="text-white text-base md:text-lg text-center w-full">
 					{{ items[selected].label }}
 				</p>
 				<ChevronDownIcon class="text-white w-6 h-6" />
 			</ListboxButton>
-			<transition
+			<Transition
 				leave-active-class="transition duration-100 ease-in"
 				leave-from-class="opacity-100"
 				leave-to-class="opacity-0"
@@ -28,7 +28,7 @@
 						</p>
 					</ListboxOption>
 				</ListboxOptions>
-			</transition>
+			</Transition>
 		</div>
 	</Listbox>
 </template>
@@ -62,14 +62,14 @@ export default defineComponent({
 			type: Array as PropType<SelectItem[]>,
 			required: true
 		},
-		selectedItem: {
+		selected: {
 			type: Number,
 			required: true
 		}
 	},
 	setup(props) {
 		return {
-			selected: useVModel(props, "selectedItem")
+			selectedItem: useVModel(props, "selected")
 		}
 	}
 })

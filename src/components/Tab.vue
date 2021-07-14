@@ -10,7 +10,7 @@
 			}"
 			@click="onClick(index)"
 		>
-			<p class="text-white p-2 text-base">
+			<p class="text-white p-2 text-sm md:text-base">
 				{{ item.label }}
 			</p>
 		</button>
