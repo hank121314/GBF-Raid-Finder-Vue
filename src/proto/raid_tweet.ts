@@ -1,8 +1,8 @@
 import { Reader } from "protobufjs/minimal"
-import { Long } from "long"
+import { MAX_VALUE} from "long"
 
 function longToNumber(long: Long): number {
-	if (long.gt(Number.MAX_SAFE_INTEGER)) {
+	if (long.gt(MAX_VALUE)) {
 		throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER")
 	}
 	return long.toNumber()
@@ -17,8 +17,9 @@ export default class RaidTweet {
 	created?: number
 	language?: string
 	profile_image?: string
+
 	constructor(input: Uint8Array) {
-		const reader = input instanceof Reader ? input : new Reader(input)
+		const reader = new Reader(input)
 		const end = reader.len
 		while (reader.pos < end) {
 			const tag = reader.uint32()
@@ -52,6 +53,5 @@ export default class RaidTweet {
 					break
 			}
 		}
-		return this
 	}
 }
