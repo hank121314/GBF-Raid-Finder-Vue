@@ -1,15 +1,11 @@
 import { createI18n } from "vue-i18n"
+import {Language} from '@/resources/settings'
 import en from "./en"
 import zhTw from "./zh-tw"
 
-export const languages = {
-	EN: "en",
-	ZH_TW: "zh-TW"
-}
-
 const messages = {
-	[languages.EN]: en,
-	[languages.ZH_TW]: zhTw
+	[Language.EN]: en,
+	[Language.ZH_TW]: zhTw
 }
 
 const i18n = createI18n({
