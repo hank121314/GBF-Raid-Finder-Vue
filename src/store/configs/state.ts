@@ -1,8 +1,8 @@
-import { TimeFormation } from "@/resources/settings"
+import { Language, TimeFormation } from "@/resources/settings"
 
 export type ConfigsState = {
 	followed: string[]
-	locale: string
+	locale: Language,
 	showBossImage: boolean
 	showUserImage: boolean
 	timeFormation: TimeFormation
@@ -10,10 +10,10 @@ export type ConfigsState = {
 
 const state: ConfigsState = {
 	followed: [],
-	locale: navigator.language,
+	locale: navigator.language as Language,
 	showBossImage: false,
 	showUserImage: false,
-	timeFormation: TimeFormation.Relative
+	timeFormation: TimeFormation.Relative,
 }
 
 export default state

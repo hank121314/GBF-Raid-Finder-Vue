@@ -1,7 +1,7 @@
 import types from "./types"
 import type { ActionTree } from "vuex"
 import type { RootState } from "@/store"
-import type { TimeFormation } from "@/resources/settings"
+import type { Language, TimeFormation } from "@/resources/settings"
 import type { ConfigsState } from "./state"
 import type { ConfigsMutations } from "./mutations"
 
@@ -12,7 +12,7 @@ export type ConfigsActions<S = ConfigsState, R = RootState> = {
 	): void
 	[types.SET_LOCALE](
 		context: vuex.Context<S, types.SET_LOCALE, ConfigsMutations, R>,
-		payload: string
+		payload: Language
 	): void
 	[types.TOGGLE_SHOW_BOSS_IMAGE](
 		context: vuex.Context<S, types.TOGGLE_SHOW_BOSS_IMAGE, ConfigsMutations, R>
