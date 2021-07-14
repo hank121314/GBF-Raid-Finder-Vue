@@ -13,8 +13,8 @@ declare global {
 			M = MutationTree<S>,
 			Root
 		> = K extends keyof M
-			? M[K] extends (state: any, payload: infer V) => infer R
-				? { commit: (name: K, payload?: V) => R } & Omit<
+			? M[K] extends (...args: any) => any
+				? { commit: (name: K, payload?: Parameters<M[K]>[1]) => ReturnType<A[K]> } & Omit<
 						ActionContext<S, Root>,
 						"commit"
 				>
