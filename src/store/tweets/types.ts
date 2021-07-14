@@ -1,0 +1,6 @@
+enum types {
+	UPDATE_TWEET = "UPDATE_TWEET",
+	FETCH_PERSISTENCE_TWEETS = "FETCH_PERSISTENCE_TWEETS"
+}
+
+export default types
