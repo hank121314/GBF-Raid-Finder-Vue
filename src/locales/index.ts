@@ -1,5 +1,5 @@
 import { createI18n } from "vue-i18n"
-import {Language} from '@/resources/settings'
+import { Language } from "@/configs"
 import en from "./en"
 import zhTw from "./zh-tw"
 

@@ -36,7 +36,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
-import { Language, TimeFormation } from "@/resources/settings"
+import { Language, TimeFormation } from "@/configs"
 import { useStore } from "@/store"
 import ConfigsTypes from "@/store/configs/types"
 import { RadioButton, Selector } from "@/components"
