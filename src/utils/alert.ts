@@ -9,6 +9,16 @@ export const successToast = (message: string): void =>
 		timeout: 2000
 	})
 
+export const infoToast = (message: string): void =>
+	createToast(message, {
+		type: "info",
+		showIcon: true,
+		position: "bottom-center",
+		transition: "slide",
+		hideProgressBar: true,
+		timeout: 1500
+	})
+
 export const failToast = (message: string): void =>
 	createToast(message, {
 		type: "danger",
