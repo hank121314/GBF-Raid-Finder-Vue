@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="fixed right-6 bottom-6 w-12 h-12 flex justify-center items-center"
+		class="fixed right-6 bottom-6 w-12 h-12 flex justify-center items-center z-10"
 	>
 		<button
 			v-wave
@@ -29,5 +29,3 @@ export default defineComponent({
 	}
 })
 </script>
-
-<style scoped></style>
