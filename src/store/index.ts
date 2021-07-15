@@ -25,7 +25,7 @@ export default createStore({
 		configs: ConfigsModule,
 		tweets: TweetsModule
 	},
-	plugins: [createPersistedState({ paths: ["configs"] })]
+	plugins: [createPersistedState({ paths: ["configs", "bosses"] })]
 })
 
 export function useStore(): vuex.Store<RootState, Actions> {

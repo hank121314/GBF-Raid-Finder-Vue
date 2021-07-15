@@ -2,7 +2,9 @@ import { Language, TimeFormation } from "@/resources/settings"
 
 export type ConfigsState = {
 	followed: string[]
-	locale: Language,
+	width: Record<string, number>
+	notification: Record<string, string>,
+	locale: Language
 	showBossImage: boolean
 	showUserImage: boolean
 	timeFormation: TimeFormation
@@ -10,10 +12,12 @@ export type ConfigsState = {
 
 const state: ConfigsState = {
 	followed: [],
+	width: {},
+	notification: {},
 	locale: navigator.language as Language,
 	showBossImage: false,
 	showUserImage: false,
-	timeFormation: TimeFormation.Relative,
+	timeFormation: TimeFormation.Relative
 }
 
 export default state
