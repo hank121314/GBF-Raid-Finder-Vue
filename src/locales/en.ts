@@ -1,6 +1,7 @@
 export default {
 	label: {
 		follow: "Follow",
+		unfollow: "Unfollow",
 		settings: "Settings",
 		level: "Level",
 		all: "All",
@@ -11,11 +12,15 @@ export default {
 		showUserImage: "Show Profile Image",
 		on: "On",
 		off: "Off",
-		language: "Language"
+		language: "Language",
+		clear: "Clear",
+		moveLeft: "Move Left",
+		moveRight: "Move Right"
 	},
 	messages: {
 		connected: "Connected to server!",
-		failFetchList: "Fail to fetch raid list!"
+		failFetchList: "Fail to fetch raid list!",
+		copySuccess: "Copied!"
 	},
 	timeFormat: {
 		relative: "Relative",
