@@ -1,4 +1,4 @@
-import { Language, TimeFormation } from "@/resources/settings"
+import { Language, TimeFormation } from "@/configs"
 
 export type ConfigsState = {
 	followed: string[]

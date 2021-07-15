@@ -1,7 +1,11 @@
 import types from "./types"
 import type { ActionTree } from "vuex"
 import type { RootState } from "@/store"
-import type { Language, TimeFormation } from "@/resources/settings"
+import type {
+	Language,
+	TimeFormation,
+	SortPosition
+} from "@/configs"
 import type { ConfigsState } from "./state"
 import type { ConfigsMutations } from "./mutations"
 
@@ -9,6 +13,10 @@ export type ConfigsActions<S = ConfigsState, R = RootState> = {
 	[types.TOGGLE_FOLLOWED](
 		context: vuex.Context<S, types.TOGGLE_FOLLOWED, ConfigsMutations, R>,
 		payload: string
+	): void
+	[types.SORT_FOLLOWED](
+		context: vuex.Context<S, types.SORT_FOLLOWED, ConfigsMutations, R>,
+		payload: { boss_name: string; position: SortPosition }
 	): void
 	[types.SET_WIDTH](
 		context: vuex.Context<S, types.SET_WIDTH, ConfigsMutations, R>,
@@ -37,6 +45,9 @@ export type ConfigsActions<S = ConfigsState, R = RootState> = {
 const actions: ConfigsActions = {
 	[types.TOGGLE_FOLLOWED]({ commit }, payload) {
 		commit(types.TOGGLE_FOLLOWED, payload)
+	},
+	[types.SORT_FOLLOWED]({ commit }, payload) {
+		commit(types.SORT_FOLLOWED, payload)
 	},
 	[types.SET_WIDTH]({ commit }, payload) {
 		commit(types.SET_WIDTH, payload)
