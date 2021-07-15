@@ -5,6 +5,12 @@ module.exports = {
 	darkMode: "class",
 	theme: {
 		extend: {
+			backgroundSize: {
+				full: "100%"
+			},
+			backgroundPosition: {
+				"top-1/5": "0% 20%"
+			},
 			colors: {
 				transparent: "transparent",
 				black: colors.black,
@@ -14,11 +20,8 @@ module.exports = {
 				darkGray: "#222222",
 				background: "#202128"
 			},
-			backgroundSize: {
-				full: "100%"
-			},
-			backgroundPosition: {
-				"top-1/5": "0% 20%"
+			cursor: {
+				"e-resize": "e-resize"
 			},
 			inset: {
 				"1/20": "5%"
@@ -32,12 +35,15 @@ module.exports = {
 			},
 			minWidth: {
 				4: "1rem",
-				5: "1.25rem"
+				5: "1.25rem",
+				40: "10rem",
+				72: "18rem"
 			}
 		}
 	},
 	variants: {
 		extend: {
+			height: ["hover"],
 			backgroundColor: ["active"]
 		}
 	},
