@@ -24,10 +24,10 @@ const mutations: ConfigsMutations = {
 		state.followed = xor(state.followed, [payload])
 	},
 	[types.SET_WIDTH](state, payload) {
-		state.width[payload.boss_name] = payload.width
+		state.widths[payload.boss_name] = payload.width
 	},
 	[types.SET_NOTIFICATION](state, payload) {
-		state.notification[payload.boss_name] = payload.notification
+		state.notifications[payload.boss_name] = payload.notification
 	},
 	[types.SET_LOCALE](state, payload) {
 		state.locale = payload
