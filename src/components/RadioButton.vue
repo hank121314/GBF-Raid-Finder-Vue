@@ -1,8 +1,7 @@
 <template>
 	<RadioGroup
 		v-model="selectedItem"
-		class="col-span-3 grid gap-4 justify-between w-full"
-		:class="`grid-cols-${items.length}`"
+		class="flex justify-evenly w-full"
 	>
 		<RadioGroupOption
 			v-for="item in items"
