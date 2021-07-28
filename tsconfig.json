@@ -10,7 +10,7 @@
 		"resolveJsonModule": true,
 		"esModuleInterop": true,
 		"isolatedModules": true,
-		"lib": ["esnext", "dom"],
+		"lib": ["esnext", "dom", "WebWorker"],
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["src/*"]
