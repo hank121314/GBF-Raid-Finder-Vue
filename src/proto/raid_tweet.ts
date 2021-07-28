@@ -1,8 +1,8 @@
 import { Reader } from "protobufjs/minimal"
-import { MAX_VALUE} from "long"
+import Long from "long"
 
 function longToNumber(long: Long): number {
-	if (long.gt(MAX_VALUE)) {
+	if (long.gt(Long.MAX_VALUE)) {
 		throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER")
 	}
 	return long.toNumber()
@@ -25,7 +25,7 @@ export default class RaidTweet {
 			const tag = reader.uint32()
 			switch (tag >>> 3) {
 				case 1:
-					this.tweet_id = longToNumber(reader.uint64() as Long)
+					this.tweet_id = longToNumber(Long.fromValue(reader.uint64()))
 					break
 				case 2:
 					this.screen_name = reader.string()
@@ -40,7 +40,7 @@ export default class RaidTweet {
 					this.text = reader.string()
 					break
 				case 6:
-					this.created = longToNumber(reader.uint64() as Long)
+					this.created = longToNumber(Long.fromValue(reader.uint64()))
 					break
 				case 7:
 					this.language = reader.string()
