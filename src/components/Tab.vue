@@ -3,6 +3,7 @@
 		<button
 			v-for="(item, index) in items"
 			:key="index"
+			aria-label="tab"
 			class="flex w-full transition-colors duration-300 rounded items-center justify-center m-1.5"
 			:class="{
 				'bg-coolGray': isSelected(index),
