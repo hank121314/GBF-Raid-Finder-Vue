@@ -8,24 +8,29 @@
 			<environment />
 		</template>
 	</settings>
+	<tweet-lists />
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, onMounted, watch, onUnmounted } from "vue"
 import { useI18n } from "vue-i18n"
+import without from "lodash/without"
 import globalI18n from "@/locales"
 import { useStore } from "@/store"
-import ws, { WebsocketEvents } from "@/services/websocket"
+import { Event, WebsocketEvents } from "@/services/websocket"
+import Players from "@/services/players"
+import WSWorker from "@/threads/websocket?worker"
 import { FAB } from "@/components"
-import { Settings, BossList, Environment } from "@/pages"
+import { Settings, BossList, Environment, TweetLists } from "@/pages"
 import TweetsType from "@/store/tweets/types"
-import { successToast } from "@/utils/alert"
+import { successToast, failToast } from "@/utils/alert"
 
 export default defineComponent({
 	name: "App",
-	components: { BossList, Environment, FAB, Settings },
+	components: { BossList, Environment, FAB, Settings, TweetLists },
 	setup() {
 		const store = useStore()
+		const worker = new WSWorker()
 		const i18n = useI18n()
 
 		onMounted(async () => {
@@ -35,23 +40,28 @@ export default defineComponent({
 			// Configure local with vuex persist state
 			globalI18n.global.locale.value = store.state.configs.locale
 
-			// Subscribe the events from websockets
-			ws.subscribeEvent((ev) => {
-				if (ev.kind === WebsocketEvents.MESSAGE) {
-					store.dispatch(TweetsType.UPDATE_TWEET, ev.data)
+			worker.onmessage = (event: MessageEvent<Event>) => {
+				const { data } = event
+				if (data.kind === WebsocketEvents.OPEN) {
+					// Clone array to worker thread.
+					worker.postMessage([...store.state.configs.followed])
+					successToast(i18n.t("messages.connected"))
 				}
-			})
+				if (data.kind === WebsocketEvents.ERROR || data.kind === WebsocketEvents.CLOSE) {
+					failToast(i18n.t("messages.cannotConnect"))
+				}
+				if (data.kind === WebsocketEvents.MESSAGE) {
+					store.dispatch(TweetsType.UPDATE_TWEET, data.data)
+				}
+			}
 
-			// Establish the connection to websocket server
-			await ws.connect()
-			successToast(i18n.t("messages.connected"))
+			await store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, store.state.configs.followed)
 
-			// Regist the followed bosses
-			ws.registerFollowBosses(store.state.configs.followed)
+			await Players.load()
 		})
 
-		onUnmounted(async () => {
-			await ws.close()
+		onUnmounted(() => {
+			worker.terminate()
 		})
 
 		// Dynamically change i18n global locale while changing configs state.
@@ -63,8 +73,11 @@ export default defineComponent({
 		)
 		watch(
 			() => store.state.configs.followed,
-			(followed) => {
-				ws.registerFollowBosses(followed)
+			(newValue, oldValue) => {
+				// Clone array to worker thread.
+				worker.postMessage([...newValue])
+				const persistenceNeeded = without(newValue, ...oldValue)
+				store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, persistenceNeeded)
 			}
 		)
 
