@@ -8,9 +8,13 @@ declare module "@heroicons/vue/solid" {
 	export { default as MenuIcon } from "@heroicons/vue/solid/esm/MenuIcon.js"
 	export { default as MinusIcon } from "@heroicons/vue/solid/esm/MinusIcon.js"
 	export { default as RefreshIcon } from "@heroicons/vue/solid/esm/RefreshIcon.js"
+	export { default as VolumeOffIcon } from "@heroicons/vue/solid/esm/VolumeOffIcon.js"
+	export { default as VolumeUpIcon } from "@heroicons/vue/solid/esm/VolumeUpIcon.js"
+	export { default as MusicNoteIcon } from "@heroicons/vue/solid/esm/MusicNoteIcon.js"
+	export { default as MenuAlt4Icon } from "@heroicons/vue/solid/esm/MenuAlt4Icon.js"
 }
 
 declare module "@heroicons/vue/outline" {
-	export { default as ArrowsExpandIcon } from "@heroicons/vue/outline/esm/ArrowsExpandIcon.js"
 	export { default as BanIcon } from "@heroicons/vue/outline/esm/BanIcon.js"
+	export { default as SwitchHorizontalIcon } from "@heroicons/vue/solid/esm/SwitchHorizontalIcon.js"
 }
