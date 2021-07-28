@@ -15,10 +15,10 @@
 		@click="onClick"
 	>
 		<div class="flex flex-1 flex-col justify-between">
-			<p v-if="!loading" class="text-base md:text-lg text-white">
+			<p v-if="!loading" class="text-base select-none md:text-lg text-white">
 				{{ boss?.jp_name ?? $t("label.unknown") }}
 			</p>
-			<p v-if="!loading" class="text-base md:text-lg text-white mt-1">
+			<p v-if="!loading" class="text-base select-none md:text-lg text-white mt-1">
 				{{ boss?.en_name ?? $t("label.unknown") }}
 			</p>
 			<div
