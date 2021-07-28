@@ -3,11 +3,7 @@
 		<p class="text-white text-base md:text-lg col-span-1 text-center">
 			{{ `${$t("label.level")}` }}
 		</p>
-		<selector
-			v-model:selected="selectedLevel"
-			class="col-span-2"
-			:items="levels"
-		/>
+		<selector v-model:selected="selectedLevel" class="col-span-2" :items="levels" />
 	</div>
 	<!-- Render 10 empty boss tiles for loading -->
 	<div v-if="loading" class="overflow-y-auto mt-2">
@@ -30,7 +26,20 @@
 	</div>
 	<button
 		v-wave="{ color: '#3B82F6' }"
-		class="rounded bg-blue-500 flex self-end justify-center items-center mt-2 py-3 px-4 hover:bg-blue-400 focus:outline-none"
+		aria-label="refresh-list"
+		class="
+			rounded
+			bg-blue-500
+			flex
+			self-end
+			justify-center
+			items-center
+			mt-2
+			py-3
+			px-4
+			hover:bg-blue-400
+			focus:outline-none
+		"
 		@click="onFetchList"
 	>
 		<RefreshIcon class="text-white w-5 h-5 md:w-6 md:h-6" />
@@ -81,9 +90,7 @@ export default defineComponent({
 
 		const bossList = computed(() => {
 			const level = levels.value[selectedLevel.value]?.level ?? 0
-			return level === 0
-				? bosses.value
-				: bosses.value.filter((b) => b.level === level)
+			return level === 0 ? bosses.value : bosses.value.filter((b) => b.level === level)
 		})
 
 		const isFollowed = (bossJPName?: string): boolean => {
