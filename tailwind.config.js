@@ -21,7 +21,7 @@ module.exports = {
 				background: "#202128"
 			},
 			cursor: {
-				"e-resize": "e-resize"
+				"col-resize": "col-resize"
 			},
 			inset: {
 				"1/20": "5%"
