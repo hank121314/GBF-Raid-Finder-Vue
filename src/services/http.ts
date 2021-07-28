@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios"
-import { baseURL } from "@/resources/settings"
+import { BASE_URL, HTTP_PROTOCOL } from "@/resources/settings"
 import RaidBoss from "@/proto/raid_boss"
 import RaidTweet from "@/proto/raid_tweet"
 
@@ -15,7 +15,7 @@ class HttpClient implements HttpClientInstance {
 
 	constructor(baseURL: string) {
 		this.#innerClient = axios.create({
-			baseURL: "https://" + baseURL,
+			baseURL: HTTP_PROTOCOL + baseURL,
 			responseType: "json"
 		})
 	}
@@ -47,7 +47,8 @@ class HttpClient implements HttpClientInstance {
 			}
 		}
 		const params = {
-			boss_names
+			boss_names,
+			limit: 50
 		}
 		const response = await this.#innerClient.post<Record<string, Uint8Array[]>>(
 			"/get_persistence_boss",
@@ -65,4 +66,4 @@ class HttpClient implements HttpClientInstance {
 	}
 }
 
-export default new HttpClient(baseURL)
+export default new HttpClient(BASE_URL)
