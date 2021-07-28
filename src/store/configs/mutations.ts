@@ -1,23 +1,16 @@
 import xor from "lodash/xor"
+import omit from "lodash/omit"
 import { SortPosition } from "@/configs"
 import types from "./types"
 import type { ConfigsState } from "./state"
-import type { Language, TimeFormation } from "@/configs"
+import type { Notifications, Language, TimeFormation } from "@/configs"
 
 export type ConfigsMutations<S = ConfigsState> = {
 	[types.TOGGLE_FOLLOWED](state: S, payload: string): void
-	[types.SORT_FOLLOWED](
-		state: S,
-		payload: { boss_name: string; position: SortPosition }
-	): void
-	[types.SET_WIDTH](
-		state: S,
-		payload: { boss_name: string; width: number }
-	): void
-	[types.SET_NOTIFICATION](
-		state: S,
-		payload: { boss_name: string; notification: string }
-	): void
+	[types.SORT_FOLLOWED](state: S, payload: { boss_name: string; position: SortPosition }): void
+	[types.SET_WIDTH](state: S, payload: { boss_name: string; width: number }): void
+	[types.RESET_WIDTH](state: S, payload: string): void
+	[types.SET_NOTIFICATION](state: S, payload: { boss_name: string; notification: Notifications }): void
 	[types.SET_LOCALE](state: S, payload: Language): void
 	[types.TOGGLE_SHOW_BOSS_IMAGE](state: S): void
 	[types.TOGGLE_SHOW_USER_IMAGE](state: S): void
@@ -29,9 +22,7 @@ const mutations: ConfigsMutations = {
 		state.followed = xor(state.followed, [payload])
 	},
 	[types.SORT_FOLLOWED](state, payload) {
-		const bossIndex = state.followed.findIndex(
-			(str) => str === payload.boss_name
-		)
+		const bossIndex = state.followed.findIndex((str) => str === payload.boss_name)
 		if (bossIndex === -1) {
 			return
 		}
@@ -55,6 +46,9 @@ const mutations: ConfigsMutations = {
 	},
 	[types.SET_WIDTH](state, payload) {
 		state.widths[payload.boss_name] = payload.width
+	},
+	[types.RESET_WIDTH](state, payload) {
+		state.widths = omit(state.widths, payload)
 	},
 	[types.SET_NOTIFICATION](state, payload) {
 		state.notifications[payload.boss_name] = payload.notification

@@ -1,9 +1,10 @@
-import { Language, TimeFormation } from "@/configs"
+import { TimeFormation } from "@/configs"
+import type { Language, Notifications } from "@/configs"
 
 export type ConfigsState = {
 	followed: string[]
 	widths: Record<string, number>
-	notifications: Record<string, string>,
+	notifications: Record<string, Notifications>
 	locale: Language
 	showBossImage: boolean
 	showUserImage: boolean
