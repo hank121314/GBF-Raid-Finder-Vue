@@ -1,3 +1,6 @@
-export { default as Settings } from "./Settings.vue"
-export { default as BossList } from "./BossList.vue"
-export { default as Environment } from "./Environment.vue"
+import { defineAsyncComponent } from "vue"
+
+export const Settings = defineAsyncComponent({ loader: () => import("./Settings.vue") })
+export const BossList = defineAsyncComponent({ loader: () => import("./BossList.vue") })
+export const Environment = defineAsyncComponent({ loader: () => import("./Environment.vue") })
+export { default as TweetLists } from "./TweetLists/TweetLists.vue"
