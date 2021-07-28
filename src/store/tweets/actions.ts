@@ -1,4 +1,5 @@
 import http from "@/services/http"
+import isEmpty from 'lodash/isEmpty'
 import types from "./types"
 import type { RootState } from "@/store"
 import type { TweetsState } from "./state"
@@ -19,6 +20,7 @@ const actions: TweetsActions = {
 		commit(types.UPDATE_TWEET, payload)
 	},
 	async [types.FETCH_PERSISTENCE_TWEETS]({ commit }, payload) {
+		if (isEmpty(payload)) return
 		const result = await http.get_persistence_boss(payload)
 		commit(types.FETCH_PERSISTENCE_TWEETS, result)
 	},
