@@ -4,6 +4,7 @@ import type RaidTweet from "@/proto/raid_tweet"
 
 export type TweetsMutations<S = TweetsState> = {
 	[types.UPDATE_TWEET](state: S, payload: RaidTweet): void
+	[types.FETCH_PERSISTENCE_TWEETS](state: S, payload: Record<string, RaidTweet[]>): void
 	[types.CLEAR_TWEETS](state: S, payload: string): void
 }
 
@@ -18,6 +19,15 @@ const mutations: TweetsMutations = {
 		} else {
 			state[boss_name].unshift(payload)
 		}
+	},
+	[types.FETCH_PERSISTENCE_TWEETS](state, payload) {
+		Object.keys(payload).forEach((boss_name) => {
+			if (!Array.isArray(state[boss_name])) {
+				state[boss_name] = payload[boss_name]
+			} else {
+				state[boss_name].unshift(...payload[boss_name])
+			}
+		})
 	},
 	[types.CLEAR_TWEETS](state, payload) {
 		state[payload] = []
