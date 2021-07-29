@@ -30,7 +30,7 @@ declare global {
 					: any,
 				options?: DispatchOptions
 				// same as payload, we need to ensure A[K] is a function
-			): A[K] extends (...args: any) => any ? ReturnType<A[K]>[1] : any
+			): A[K] extends (...args: any) => any ? ReturnType<A[K]> : any
 		}
 	}
 }
