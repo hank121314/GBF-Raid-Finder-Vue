@@ -11,7 +11,7 @@ export type TweetsActions<S = TweetsState, R = RootState> = {
 	[types.FETCH_PERSISTENCE_TWEETS](
 		context: vuex.Context<S, types.FETCH_PERSISTENCE_TWEETS, TweetsMutations, R>,
 		payload: string[]
-	): void
+	): Promise<void>
 	[types.CLEAR_TWEETS](context: vuex.Context<S, types.CLEAR_TWEETS, TweetsMutations, R>, payload: string): void
 }
 

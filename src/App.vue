@@ -14,6 +14,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, watch, onUnmounted } from "vue"
 import { useI18n } from "vue-i18n"
+import isEmpty from "lodash/isEmpty"
 import without from "lodash/without"
 import globalI18n from "@/locales"
 import { useStore } from "@/store"
@@ -40,6 +41,8 @@ export default defineComponent({
 			// Configure local with vuex persist state
 			globalI18n.global.locale.value = store.state.configs.locale
 
+			await store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, store.state.configs.followed)
+
 			worker.onmessage = (event: MessageEvent<Event>) => {
 				const { data } = event
 				if (data.kind === WebsocketEvents.OPEN) {
@@ -54,8 +57,6 @@ export default defineComponent({
 					store.dispatch(TweetsType.UPDATE_TWEET, data.data)
 				}
 			}
-
-			await store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, store.state.configs.followed)
 
 			await Players.load()
 		})
@@ -74,10 +75,15 @@ export default defineComponent({
 		watch(
 			() => store.state.configs.followed,
 			(newValue, oldValue) => {
-				// Clone array to worker thread.
-				worker.postMessage([...newValue])
+				const purged = without(oldValue, ...newValue)
 				const persistenceNeeded = without(newValue, ...oldValue)
-				store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, persistenceNeeded)
+				if (!isEmpty(purged)) {
+					store.dispatch(TweetsType.CLEAR_TWEETS, purged[0])
+				}
+				store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, persistenceNeeded).then(() => {
+					// Clone array to worker thread.
+					worker.postMessage([...newValue])
+				})
 			}
 		)
 
