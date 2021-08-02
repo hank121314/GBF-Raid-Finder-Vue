@@ -31,7 +31,7 @@ export default defineComponent({
 	components: { BossList, Environment, FAB, Settings, TweetLists },
 	setup() {
 		const store = useStore()
-		const worker = new WSWorker()
+		let worker: Worker | null = null
 		const i18n = useI18n()
 
 		onMounted(async () => {
@@ -43,11 +43,13 @@ export default defineComponent({
 
 			await store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, store.state.configs.followed)
 
+			worker = new WSWorker()
+
 			worker.onmessage = (event: MessageEvent<Event>) => {
 				const { data } = event
 				if (data.kind === WebsocketEvents.OPEN) {
 					// Clone array to worker thread.
-					worker.postMessage([...store.state.configs.followed])
+					worker?.postMessage([...store.state.configs.followed])
 					successToast(i18n.t("messages.connected"))
 				}
 				if (data.kind === WebsocketEvents.ERROR || data.kind === WebsocketEvents.CLOSE) {
@@ -62,7 +64,7 @@ export default defineComponent({
 		})
 
 		onUnmounted(() => {
-			worker.terminate()
+			worker?.terminate()
 		})
 
 		// Dynamically change i18n global locale while changing configs state.
@@ -82,7 +84,7 @@ export default defineComponent({
 				}
 				store.dispatch(TweetsType.FETCH_PERSISTENCE_TWEETS, persistenceNeeded).then(() => {
 					// Clone array to worker thread.
-					worker.postMessage([...newValue])
+					worker?.postMessage([...newValue])
 				})
 			}
 		)
