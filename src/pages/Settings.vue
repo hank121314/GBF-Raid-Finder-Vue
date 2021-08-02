@@ -1,7 +1,7 @@
 <template>
 	<TransitionRoot appear :show="isOpen" as="template">
 		<Dialog as="div" @close="onClose">
-			<div class="z-20 fixed w-full h-5/6 top-1/20 max-w-lg left-0 right-0 m-auto overflow-y-hidden">
+			<div class="z-20 fixed w-full h-5/6 top-1/20 max-w-lg left-0 right-0 m-auto">
 				<TransitionChild
 					as="template"
 					enter="duration-300 ease-out"
@@ -23,6 +23,10 @@
 					leave-to="opacity-0 scale-95"
 				>
 					<div class="flex w-full h-full max-w-9/10 bg-gray-800 rounded p-4 m-auto flex-col">
+						<button v-wave class="absolute right-10 top-1 focus:outline-none rounded-full" @click="onClose">
+							<x-circle-icon class="w-8 h-8 text-white" />
+						</button>
+						<div class="mb-6" />
 						<tab v-model:selected="selected" :items="tabItems" />
 						<slot :name="slotName" />
 					</div>
@@ -33,8 +37,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineAsyncComponent, ref, computed } from "vue"
+import { defineComponent, ref, computed } from "vue"
 import { useI18n } from "vue-i18n"
+import { XCircleIcon } from "@heroicons/vue/outline"
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay } from "@headlessui/vue"
 import { Tab } from "@/components"
 
@@ -45,7 +50,8 @@ export default defineComponent({
 		DialogOverlay,
 		Tab,
 		TransitionRoot,
-		TransitionChild
+		TransitionChild,
+		XCircleIcon
 	},
 	props: {
 		isOpen: {
