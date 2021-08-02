@@ -18,6 +18,9 @@ const mutations: TweetsMutations = {
 			state[boss_name] = [payload]
 		} else {
 			state[boss_name].unshift(payload)
+			if (state[boss_name].length > 100) {
+				state[boss_name].pop()
+			}
 		}
 	},
 	[types.FETCH_PERSISTENCE_TWEETS](state, payload) {
