@@ -11,49 +11,41 @@
 			@click-menu="onClickMenu"
 			@click-music="onClickMusic"
 		/>
-		<DynamicScroller :items="tweets" :min-item-size="92" class="scroller z-0" key-field="tweet_id">
-			<template #default="{ item: tweet, index, active }">
-				<DynamicScrollerItem :item="tweet" :active="active" :size-dependencies="[tweet.tweet_id]" :data-index="index">
-					<div
-						class="px-2 py-2 bg-gray-700 my-2 rounded cursor-pointer"
-						:class="`tweet-${tweet.tweet_id}`"
-						data-clipboard-action="copy"
-						:data-clipboard-target="`#raid-${tweet.tweet_id}`"
-						@click="onClickTweet(`tweet-${tweet.tweet_id}`)"
+		<div v-for="tweet in tweets" :key="tweet.tweet_id" class="z-0">
+			<div
+				class="px-2 py-2 bg-gray-700 my-4 rounded cursor-pointer"
+				:class="`tweet-${tweet.tweet_id}`"
+				data-clipboard-action="copy"
+				:data-clipboard-target="`#raid-${tweet.tweet_id}`"
+				@click="onClickTweet(`tweet-${tweet.tweet_id}`)"
+			>
+				<div class="flex items-center">
+					<img
+						v-if="showUserImage"
+						:src="tweet.profile_image"
+						class="rounded-full w-7 h-7 object-cover bg-cover"
+						alt="profile_image"
 					>
-						<div class="flex items-center">
-							<img
-								v-if="showUserImage"
-								:src="tweet.profile_image"
-								class="rounded-full w-7 h-7 object-cover bg-cover"
-								alt="profile_image"
-							/>
-							<p
-								:id="`raid-${tweet.tweet_id}`"
-								class="text-white text-base md:text-lg"
-								:class="{ 'ml-2': showUserImage }"
-							>
-								{{ tweet.raid_id }}
-							</p>
-						</div>
-						<p
-							class="text-white text-sm md:text-base w-full py-2 px-2 bg-gray-600 rounded-md mt-2"
-							:class="{ hidden: isEmpty(tweet.text) }"
-						>
-							{{ tweet.text }}
-						</p>
-						<div class="flex items-center justify-between mt-2">
-							<p class="text-white text-xs text-left md:text-sm">
-								{{ tweet.screen_name }}
-							</p>
-							<p class="w-full text-white text-xs text-right md:text-sm">
-								{{ formatTime(tweet.created) }}
-							</p>
-						</div>
-					</div>
-				</DynamicScrollerItem>
-			</template>
-		</DynamicScroller>
+					<p :id="`raid-${tweet.tweet_id}`" class="text-white text-base md:text-lg" :class="{ 'ml-2': showUserImage }">
+						{{ tweet.raid_id }}
+					</p>
+				</div>
+				<p
+					class="text-white text-sm md:text-base w-full py-2 px-2 bg-gray-600 rounded-md mt-2"
+					:class="{ hidden: isEmpty(tweet.text) }"
+				>
+					{{ tweet.text }}
+				</p>
+				<div class="flex items-center justify-between mt-2">
+					<p class="text-white text-xs text-left md:text-sm">
+						{{ tweet.screen_name }}
+					</p>
+					<p class="w-full text-white text-xs text-right md:text-sm">
+						{{ formatTime(tweet.created) }}
+					</p>
+				</div>
+			</div>
+		</div>
 	</div>
 	<tweet-list-slider v-model:list-width="width" @change-width="onChangeWidth" />
 </template>
@@ -64,7 +56,6 @@ import { useI18n } from "vue-i18n"
 import dayjs from "dayjs"
 import isEmpty from "lodash/isEmpty"
 import Clipboard from "clipboard"
-import { DynamicScroller, DynamicScrollerItem } from "vue-virtual-scroller"
 import globalI18n from "@/locales"
 import Players from "@/services/players"
 import { TimeFormation, ListConfiguration, SortPosition, Notifications, HeaderMenuItemName } from "@/configs"
@@ -77,7 +68,7 @@ import type { MenuItemProps } from "@/components/MenuList.vue"
 
 export default defineComponent({
 	name: "TweetList",
-	components: { DynamicScroller, DynamicScrollerItem, TweetListHeader, TweetListSlider },
+	components: { TweetListHeader, TweetListSlider },
 	props: {
 		boss: {
 			type: Object as PropType<RaidBoss>,
