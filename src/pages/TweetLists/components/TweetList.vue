@@ -17,30 +17,37 @@
 				:class="`tweet-${tweet.tweet_id}`"
 				data-clipboard-action="copy"
 				:data-clipboard-target="`#raid-${tweet.tweet_id}`"
-				@click="onClickTweet(`tweet-${tweet.tweet_id}`)"
+				@click="onClickTweet(tweet)"
 			>
-				<div class="flex items-center">
-					<img
-						v-if="showUserImage"
-						:src="tweet.profile_image"
-						class="rounded-full w-7 h-7 object-cover bg-cover"
-						alt="profile_image"
-					>
-					<p :id="`raid-${tweet.tweet_id}`" class="text-white text-base md:text-lg" :class="{ 'ml-2': showUserImage }">
-						{{ tweet.raid_id }}
-					</p>
+				<div class="flex items-center justify-between">
+					<div class="flex items-center">
+						<img
+							v-if="showUserImage"
+							:src="tweet.profile_image"
+							class="rounded-full w-7 h-7 object-cover bg-cover"
+							alt="profile_image"
+						>
+						<p
+							:id="`raid-${tweet.tweet_id}`"
+							class="text-white text-base md:text-lg"
+							:class="{ 'ml-2': showUserImage, 'text-gray-500': tweet.copied }"
+						>
+							{{ tweet.raid_id }}
+						</p>
+					</div>
+					<ClipboardCheckIcon v-if="tweet.copied" class="w-6 h-6 text-gray-500" />
 				</div>
 				<p
 					class="text-white text-sm md:text-base w-full py-2 px-2 bg-gray-600 rounded-md mt-2"
-					:class="{ hidden: isEmpty(tweet.text) }"
+					:class="{ hidden: isEmpty(tweet.text), 'text-gray-500': tweet.copied }"
 				>
 					{{ tweet.text }}
 				</p>
 				<div class="flex items-center justify-between mt-2">
-					<p class="text-white text-xs text-left md:text-sm">
+					<p class="text-white text-xs text-left md:text-sm" :class="{ 'text-gray-500': tweet.copied }">
 						{{ tweet.screen_name }}
 					</p>
-					<p class="w-full text-white text-xs text-right md:text-sm">
+					<p class="w-full text-white text-xs text-right md:text-sm" :class="{ 'text-gray-500': tweet.copied }">
 						{{ formatTime(tweet.created) }}
 					</p>
 				</div>
@@ -60,6 +67,7 @@ import globalI18n from "@/locales"
 import Players from "@/services/players"
 import { TimeFormation, ListConfiguration, SortPosition, Notifications, HeaderMenuItemName } from "@/configs"
 import { infoToast } from "@/utils/alert"
+import { ClipboardCheckIcon } from "@heroicons/vue/outline"
 import TweetListHeader from "./TweetListHeader.vue"
 import TweetListSlider from "./TweetListSlider.vue"
 import type RaidBoss from "@/proto/raid_boss"
@@ -68,7 +76,7 @@ import type { MenuItemProps } from "@/components/MenuList.vue"
 
 export default defineComponent({
 	name: "TweetList",
-	components: { TweetListHeader, TweetListSlider },
+	components: { ClipboardCheckIcon, TweetListHeader, TweetListSlider },
 	props: {
 		boss: {
 			type: Object as PropType<RaidBoss>,
@@ -103,7 +111,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	emits: ["changeWidth", "clickPosition", "clear", "unfollow", "clickResetWidth", "clickMusic"],
+	emits: ["changeWidth", "clickPosition", "clear", "unfollow", "copied", "clickResetWidth", "clickMusic"],
 	setup(props, { emit }) {
 		const width = ref(props.listWidth)
 		const i18n = useI18n()
@@ -124,12 +132,13 @@ export default defineComponent({
 			}
 		)
 
-		const onClickTweet = (className: string) => {
-			const clipboard = new Clipboard(`.${className}`)
+		const onClickTweet = (tweet: RaidTweet) => {
+			const clipboard = new Clipboard(`.tweet-${tweet.tweet_id}`)
 			clipboard.on("success", function (e) {
 				infoToast(i18n.t("messages.copySuccess"))
 				e.clearSelection()
 				clipboard.destroy()
+				emit("copied", tweet)
 			})
 		}
 
