@@ -1,9 +1,9 @@
 <template>
 	<div
 		:id="tweetListId"
-		class="inline-block overflow-hidden relative pr-4"
+		class="inline-block relative pr-4"
 		:style="{ width: `${width}px`, minWidth: `${minWidth}px`, maxWidth: `${maxWidth}px` }"
-		:class="containerClass"
+		:class="[{ 'overflow-hidden': !isMobile, 'overflow-y-auto': isMobile }, containerClass]"
 	>
 		<tweet-list-header
 			:boss="boss"
@@ -30,7 +30,7 @@
 						>
 						<p
 							:id="`raid-${tweet.tweet_id}`"
-							class="text-white text-base md:text-lg"
+							class="text-white text-base font-sans md:text-lg"
 							:class="{ 'ml-2': showUserImage, 'text-gray-500': tweet.copied }"
 						>
 							{{ tweet.raid_id }}
@@ -39,16 +39,19 @@
 					<ClipboardCheckIcon v-if="tweet.copied" class="w-6 h-6 text-gray-500" />
 				</div>
 				<p
-					class="text-white text-sm md:text-base w-full py-2 px-2 bg-gray-600 rounded-md mt-2"
+					class="text-white text-sm font-sans md:text-base w-full py-2 px-2 bg-gray-600 rounded-md mt-2"
 					:class="{ hidden: isEmpty(tweet.text), 'text-gray-500': tweet.copied }"
 				>
 					{{ tweet.text }}
 				</p>
 				<div class="flex items-center justify-between mt-2">
-					<p class="text-white text-xs text-left md:text-sm" :class="{ 'text-gray-500': tweet.copied }">
+					<p class="text-white text-xs text-left font-sans md:text-sm" :class="{ 'text-gray-500': tweet.copied }">
 						{{ tweet.screen_name }}
 					</p>
-					<p class="w-full text-white text-xs text-right md:text-sm" :class="{ 'text-gray-500': tweet.copied }">
+					<p
+						class="w-full text-white text-xs text-right font-sans md:text-sm"
+						:class="{ 'text-gray-500': tweet.copied }"
+					>
 						{{ formatTime(tweet.created) }}
 					</p>
 				</div>
@@ -61,10 +64,12 @@
 <script lang="ts">
 import { defineComponent, onMounted, onUnmounted, PropType, ref, watch } from "vue"
 import { useI18n } from "vue-i18n"
+import { nanoid } from "nanoid"
 import dayjs from "dayjs"
 import isEmpty from "lodash/isEmpty"
 import Clipboard from "clipboard"
 import PerfectScrollbar from "perfect-scrollbar"
+import { isMobile } from "mobile-device-detect"
 import globalI18n from "@/locales"
 import Players from "@/services/players"
 import { TimeFormation, ListConfiguration, SortPosition, Notifications, HeaderMenuItemName } from "@/configs"
@@ -115,17 +120,22 @@ export default defineComponent({
 	},
 	emits: ["changeWidth", "clickPosition", "clear", "unfollow", "copied", "clickResetWidth", "clickMusic"],
 	setup(props, { emit }) {
-		const tweetListId = "tweet-list"
+		const tweetListId = `tweet-list-${nanoid()}`
 		const width = ref(props.listWidth)
 		const i18n = useI18n()
 		let ps: PerfectScrollbar | null = null
 
 		onMounted(() => {
-			ps = new PerfectScrollbar(`#${tweetListId}`)
+			if (!isMobile) {
+				ps = new PerfectScrollbar(`#${tweetListId}`, {
+					suppressScrollX: true
+				})
+			}
 		})
 
 		onUnmounted(() => {
 			ps?.destroy()
+			ps = null
 		})
 
 		watch(
@@ -213,7 +223,8 @@ export default defineComponent({
 			onChangeWidth,
 			onClickMenu,
 			onClickMusic,
-			isEmpty
+			isEmpty,
+			isMobile
 		}
 	}
 })
