@@ -17,6 +17,7 @@ export default class RaidTweet {
 	created?: number
 	language?: string
 	profile_image?: string
+	copied?: boolean = false
 
 	constructor(input: Uint8Array) {
 		const reader = new Reader(input)
