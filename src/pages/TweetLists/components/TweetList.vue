@@ -1,7 +1,7 @@
 <template>
 	<div
 		:id="tweetListId"
-		class="inline-block overflow-hidden relative"
+		class="inline-block overflow-hidden relative pr-4"
 		:style="{ width: `${width}px`, minWidth: `${minWidth}px`, maxWidth: `${maxWidth}px` }"
 		:class="containerClass"
 	>
