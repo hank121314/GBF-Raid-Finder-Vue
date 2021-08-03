@@ -1,6 +1,7 @@
 <template>
 	<div
-		class="inline-block overflow-y-auto"
+		:id="tweetListId"
+		class="inline-block overflow-hidden relative"
 		:style="{ width: `${width}px`, minWidth: `${minWidth}px`, maxWidth: `${maxWidth}px` }"
 		:class="containerClass"
 	>
@@ -58,11 +59,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from "vue"
+import { defineComponent, onMounted, onUnmounted, PropType, ref, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import dayjs from "dayjs"
 import isEmpty from "lodash/isEmpty"
 import Clipboard from "clipboard"
+import PerfectScrollbar from "perfect-scrollbar"
 import globalI18n from "@/locales"
 import Players from "@/services/players"
 import { TimeFormation, ListConfiguration, SortPosition, Notifications, HeaderMenuItemName } from "@/configs"
@@ -113,8 +115,18 @@ export default defineComponent({
 	},
 	emits: ["changeWidth", "clickPosition", "clear", "unfollow", "copied", "clickResetWidth", "clickMusic"],
 	setup(props, { emit }) {
+		const tweetListId = "tweet-list"
 		const width = ref(props.listWidth)
 		const i18n = useI18n()
+		let ps: PerfectScrollbar | null = null
+
+		onMounted(() => {
+			ps = new PerfectScrollbar(`#${tweetListId}`)
+		})
+
+		onUnmounted(() => {
+			ps?.destroy()
+		})
 
 		watch(
 			() => props.tweets.length,
@@ -122,6 +134,7 @@ export default defineComponent({
 				if (newValue - oldValue === 1) {
 					Players.play(props.notification)
 				}
+				ps?.update()
 			}
 		)
 
@@ -192,6 +205,7 @@ export default defineComponent({
 
 		return {
 			width,
+			tweetListId,
 			minWidth: ListConfiguration.minWidth,
 			maxWidth: ListConfiguration.maxWidth,
 			formatTime,
