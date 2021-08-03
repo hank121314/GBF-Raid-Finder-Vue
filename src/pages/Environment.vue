@@ -1,6 +1,6 @@
 <template>
 	<div class="overflow-y-auto h-full">
-		<p class="text-base text-white mt-2 ml-4 col-span-1 md:text-lg">
+		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.timeFormat") }}
 		</p>
 		<RadioButton
@@ -8,7 +8,7 @@
 			:items="timeFormatItems"
 			class="mt-4"
 		/>
-		<p class="text-base text-white mt-2 ml-4 col-span-1 md:text-lg">
+		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.showBossImage") }}
 		</p>
 
@@ -17,7 +17,7 @@
 			:items="showBossImageItems"
 			class="mt-4"
 		/>
-		<p class="text-base text-white mt-2 ml-4 col-span-1 md:text-lg">
+		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.showUserImage") }}
 		</p>
 
@@ -26,7 +26,7 @@
 			:items="showUserImageItems"
 			class="mt-4"
 		/>
-		<p class="text-base text-white mt-2 ml-4 col-span-1 md:text-lg">
+		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.language") }}
 		</p>
 		<selector v-model:selected="locale" :items="localeItems" />

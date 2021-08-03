@@ -53,7 +53,7 @@
 									:class="{ 'bg-white w-2 h-2 md:w-3 md:h-3': index === selected }"
 								/>
 							</div>
-							<p class="text-white">
+							<p class="text-white font-sans">
 								{{ item.label }}
 							</p>
 						</button>

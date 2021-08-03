@@ -35,7 +35,7 @@
 							@click="onClick(item)"
 						>
 							<component :is="item.icon" class="w-6 h-6 text-white mr-4" />
-							<p class="text-white whitespace-nowrap">
+							<p class="text-white font-sans whitespace-nowrap">
 								{{ item.label }}
 							</p>
 						</button>

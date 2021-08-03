@@ -4,7 +4,7 @@
 			<ListboxButton
 				class="flex w-full items-center justify-between p-2 bg-darkGray rounded"
 			>
-				<p class="text-white text-base md:text-lg text-center w-full">
+				<p class="text-white text-base font-sans md:text-lg text-center w-full">
 					{{ items[selected].label }}
 				</p>
 				<ChevronDownIcon class="text-white w-6 h-6" />
@@ -23,7 +23,7 @@
 						:value="index"
 						class="transition p-2 hover:bg-coolGray"
 					>
-						<p class="text-white text-lg cursor-pointer text-center">
+						<p class="text-white text-lg font-sans cursor-pointer text-center">
 							{{ item.label }}
 						</p>
 					</ListboxOption>

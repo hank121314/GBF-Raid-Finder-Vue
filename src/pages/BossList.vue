@@ -1,6 +1,6 @@
 <template>
 	<div class="mt-2 grid grid-cols-3 items-center">
-		<p class="text-white text-base md:text-lg col-span-1 text-center">
+		<p class="text-white text-base font-sans md:text-lg col-span-1 text-center">
 			{{ `${$t("label.level")}` }}
 		</p>
 		<selector v-model:selected="selectedLevel" class="col-span-2" :items="levels" />
@@ -43,7 +43,7 @@
 		@click="onFetchList"
 	>
 		<RefreshIcon class="text-white w-5 h-5 md:w-6 md:h-6" />
-		<p class="text-sm md:text-base text-white ml-2">
+		<p class="text-sm font-sans md:text-base text-white ml-2">
 			{{ $t("label.refresh") }}
 		</p>
 	</button>
