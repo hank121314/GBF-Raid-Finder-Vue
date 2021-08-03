@@ -15,6 +15,7 @@
 			@click-position="onClickPosition"
 			@click-music="onClickMusic"
 			@click-reset-width="onClickResetWidth"
+			@copied="onCopiedTweet"
 			@clear="onClearTweets"
 			@unfollow="onClickUnfollow"
 		/>
@@ -31,7 +32,8 @@ import isEmpty from "lodash/isEmpty"
 import { TweetList } from "./components"
 import TweetsTypes from "@/store/tweets/types"
 import ConfigsTypes from "@/store/configs/types"
-import RaidBoss from "@/proto/raid_boss"
+import type RaidBoss from "@/proto/raid_boss"
+import type RaidTweet from "@/proto/raid_tweet"
 
 export default defineComponent({
 	name: "TweetLists",
@@ -81,6 +83,10 @@ export default defineComponent({
 			store.dispatch(ConfigsTypes.RESET_WIDTH, boss_name)
 		}
 
+		const onCopiedTweet = (tweet: RaidTweet) => {
+			store.dispatch(TweetsTypes.COPIED_TWEET, tweet)
+		}
+
 		const onClickMusic = (payload: { boss_name: string; notification: Notifications }) => {
 			store.dispatch(ConfigsTypes.SET_NOTIFICATION, payload)
 		}
@@ -99,6 +105,7 @@ export default defineComponent({
 			onClickResetWidth,
 			onClickUnfollow,
 			onClickMusic,
+			onCopiedTweet,
 			isEmpty
 		}
 	}
