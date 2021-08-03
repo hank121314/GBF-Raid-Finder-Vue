@@ -19,6 +19,7 @@
 		"mitt": "^3.0.0",
 		"mobile-device-detect": "^0.4.3",
 		"mosha-vue-toastify": "^1.0.17",
+		"perfect-scrollbar": "^1.5.2",
 		"protobufjs": "^6.11.2",
 		"tone": "^14.7.77",
 		"type-fest": "^1.2.1",
