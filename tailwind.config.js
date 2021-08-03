@@ -23,6 +23,9 @@ module.exports = {
 			cursor: {
 				"col-resize": "col-resize"
 			},
+			fontFamily: {
+				sans: ["Noto Sans TC"]
+			},
 			inset: {
 				"1/20": "5%"
 			},
