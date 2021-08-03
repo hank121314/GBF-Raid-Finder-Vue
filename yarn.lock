@@ -65,6 +65,11 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
+"@fontsource/noto-sans-tc@^4.5.0":
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/@fontsource/noto-sans-tc/-/noto-sans-tc-4.5.0.tgz#ea83a2c0851241464a9aea5facd9be7455b0f2dd"
+  integrity sha512-7z8aT4aY5EJ8gggfJhUhtXL/CZQQSZ+HBuhXxiHy+NkvZG2Jz+Aa1kxrsJivzroJuK9dySYN4Pd/GENJv5WFqA==
+
 "@headlessui/vue@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.3.0.tgz#5da5b63d4cc77b7dde6b33ea724802f10ecf3867"

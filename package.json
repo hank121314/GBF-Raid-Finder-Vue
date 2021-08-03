@@ -9,6 +9,7 @@
 		"serve": "vite preview"
 	},
 	"dependencies": {
+		"@fontsource/noto-sans-tc": "^4.5.0",
 		"@headlessui/vue": "^1.3.0",
 		"@heroicons/vue": "^1.0.1",
 		"axios": "^0.21.1",
