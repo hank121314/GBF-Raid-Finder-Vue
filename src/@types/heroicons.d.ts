@@ -16,6 +16,7 @@ declare module "@heroicons/vue/solid" {
 
 declare module "@heroicons/vue/outline" {
 	export { default as BanIcon } from "@heroicons/vue/outline/esm/BanIcon.js"
-	export { default as SwitchHorizontalIcon } from "@heroicons/vue/solid/esm/SwitchHorizontalIcon.js"
-	export { default as XCircleIcon } from "@heroicons/vue/solid/esm/XCircleIcon.js"
+	export { default as SwitchHorizontalIcon } from "@heroicons/vue/outline/esm/SwitchHorizontalIcon.js"
+	export { default as XCircleIcon } from "@heroicons/vue/outline/esm/XCircleIcon.js"
+	export {default as ClipboardCheckIcon} from "@heroicons/vue/outline/esm/ClipboardCheckIcon"
 }
