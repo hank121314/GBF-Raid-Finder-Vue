@@ -8,6 +8,7 @@ import type RaidTweet from "@/proto/raid_tweet"
 
 export type TweetsActions<S = TweetsState, R = RootState> = {
 	[types.UPDATE_TWEET](context: vuex.Context<S, types.UPDATE_TWEET, TweetsMutations, R>, payload: RaidTweet): void
+	[types.COPIED_TWEET](context: vuex.Context<S, types.COPIED_TWEET, TweetsMutations, R>, payload: RaidTweet): void
 	[types.FETCH_PERSISTENCE_TWEETS](
 		context: vuex.Context<S, types.FETCH_PERSISTENCE_TWEETS, TweetsMutations, R>,
 		payload: string[]
@@ -18,6 +19,9 @@ export type TweetsActions<S = TweetsState, R = RootState> = {
 const actions: TweetsActions = {
 	[types.UPDATE_TWEET]({ commit }, payload) {
 		commit(types.UPDATE_TWEET, payload)
+	},
+	[types.COPIED_TWEET]({ commit }, payload) {
+		commit(types.COPIED_TWEET, payload)
 	},
 	async [types.FETCH_PERSISTENCE_TWEETS]({ commit }, payload) {
 		if (isEmpty(payload)) return
