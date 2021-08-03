@@ -1,5 +1,5 @@
 <template>
-	<div class="h-2 w-full sticky top-0 bg-background z-10" />
+	<div class="h-2 w-full sticky top-0 bg-background" />
 	<div
 		:style="{
 			backgroundImage:
@@ -24,7 +24,6 @@
 			bg-full bg-top-1/5
 			top-2
 			sticky
-			z-10
 		"
 		@mousemove="onStartHoverHeader"
 		@mouseleave="onEndHoverHeader"
