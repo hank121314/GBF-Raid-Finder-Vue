@@ -15,6 +15,20 @@ export default defineConfig({
 					tone: [
 						"node_modules/tone/build/esm/index.js",
 						"node_modules/standardized-audio-context/build/es2019/module.js"
+					],
+					font: [
+						"node_modules/@fontsource/noto-sans-tc/index.css"
+					],
+					lodash: [
+						"node_modules/lodash/throttle.js",
+						"node_modules/lodash/without.js",
+						"node_modules/lodash/isEmpty.js",
+						"node_modules/lodash/filter.js",
+						"node_modules/lodash/reject.js",
+						"node_modules/lodash/omit.js",
+						"node_modules/lodash/xor.js",
+						"node_modules/lodash/unionBy.js",
+						"node_modules/lodash/isNil.js"
 					]
 				}
 			}
