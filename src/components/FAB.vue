@@ -11,7 +11,7 @@
 				bg-gray-700
 				flex
 				justify-center
-				items-center
+				items-center shadow-deep
 				hover:bg-gray-500
 			"
 			@click="onClick"
