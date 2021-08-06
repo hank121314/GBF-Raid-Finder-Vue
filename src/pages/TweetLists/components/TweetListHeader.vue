@@ -30,10 +30,10 @@
 	>
 		<div class="flex h-full w-full justify-between px-2 items-center">
 			<div class="flex flex-col justify-between overflow-hidden">
-				<p class="text-white text-sm font-sans select-none whitespace-nowrap overflow-ellipsis md:text-base">
+				<p class="text-white text-sm font-sans select-none whitespace-nowrap overflow-ellipsis overflow-hidden md:text-base">
 					{{ boss?.jp_name ?? $t("label.unknown") }}
 				</p>
-				<p class="text-white text-sm font-sans select-none whitespace-nowrap overflow-ellipsis md:text-base">
+				<p class="text-white text-sm font-sans select-none whitespace-nowrap overflow-ellipsis overflow-hidden md:text-base">
 					{{ boss?.en_name ?? $t("label.unknown") }}
 				</p>
 			</div>
