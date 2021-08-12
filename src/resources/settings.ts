@@ -1,4 +1,4 @@
-export const BASE_URL: Readonly<string> = "api-gbf-raid-finder.amlispiration.com"
+export const BASE_URL: Readonly<string> = "API_HOST_NAME"
 
 export const HTTP_PROTOCOL: Readonly<string> = "https://"
 

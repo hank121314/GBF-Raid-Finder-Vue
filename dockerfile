@@ -10,5 +10,7 @@ RUN yarn build
 # production stage
 FROM nginx:1.21.1-alpine as production-stage
 COPY --from=build-stage /app/dist /usr/share/nginx/html
+COPY ./scripts/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/entrypoint.sh"]
