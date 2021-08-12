@@ -41,6 +41,7 @@ import { defineComponent, ref, computed } from "vue"
 import { useI18n } from "vue-i18n"
 import { XCircleIcon } from "@heroicons/vue/outline"
 import { TransitionRoot, TransitionChild, Dialog, DialogOverlay } from "@headlessui/vue"
+import { SettingsTab } from "@/configs"
 import { Tab } from "@/components"
 
 export default defineComponent({
@@ -63,7 +64,7 @@ export default defineComponent({
 		const i18n = useI18n()
 		const selected = ref(0)
 		const tabItems = computed(() => [{ label: i18n.t("label.follow") }, { label: i18n.t("label.settings") }])
-		const slotName = computed(() => (selected.value === 0 ? "boss-list" : "environment"))
+		const slotName = computed(() => (selected.value === 0 ? SettingsTab.BOSS_LIST : SettingsTab.ENVIRONMENT))
 
 		const onClose = () => {
 			emit("close")

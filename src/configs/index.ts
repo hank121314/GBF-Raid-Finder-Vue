@@ -1,5 +1,10 @@
 import { isMobile } from "mobile-device-detect"
 
+export enum SettingsTab {
+	BOSS_LIST = "BOSS_LIST",
+	ENVIRONMENT = "ENVIRONMENT"
+}
+
 export enum HeaderMenuItemName {
 	CLEAR = "CLEAR",
 	MOVE_LEFT = "MOVE_LEFT",

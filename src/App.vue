@@ -1,10 +1,10 @@
 <template>
 	<f-a-b @click="onSettingsOpen" />
 	<settings :is-open="isSettingsOpen" @close="onSettingsClose">
-		<template #boss-list>
+		<template #[SettingsTab.BOSS_LIST]>
 			<boss-list />
 		</template>
-		<template #environment>
+		<template #[SettingsTab.ENVIRONMENT]>
 			<environment />
 		</template>
 	</settings>
@@ -17,6 +17,7 @@ import { useI18n } from "vue-i18n"
 import isEmpty from "lodash/isEmpty"
 import without from "lodash/without"
 import globalI18n from "@/locales"
+import { SettingsTab } from "@/configs"
 import { useStore } from "@/store"
 import { Event, WebsocketEvents } from "@/services/websocket"
 import Players from "@/services/players"
@@ -100,6 +101,7 @@ export default defineComponent({
 		}
 
 		return {
+			SettingsTab,
 			isSettingsOpen,
 			onSettingsOpen,
 			onSettingsClose
