@@ -3,9 +3,9 @@ entries:
   gbf-raid-finder-vue:
   - apiVersion: v2
     appVersion: v1.0.4
-    created: "2021-08-12T09:57:46.666820363Z"
+    created: "2021-08-12T10:08:47.128255176Z"
     description: GBF Raid Finder Vue Helm chart for kubernetes
-    digest: c34e5e8bc03a4770dbebe5495fc6fa19a2daf2325a695e6512c7b89318cbd7af
+    digest: e0bd08fba176fbe3e01b4d97d25ce3a01ffec42ef39b0fdf11fdcd5a085bba70
     name: gbf-raid-finder-vue
     type: application
     urls:
@@ -51,4 +51,4 @@ entries:
     urls:
     - https://hank121314.github.io/GBF-Raid-Finder-Vue/gbf-raid-finder-vue-1.0.0.tgz
     version: 1.0.0
-generated: "2021-08-12T09:57:46.666110154Z"
+generated: "2021-08-12T10:08:47.127403265Z"
