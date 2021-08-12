@@ -8,5 +8,3 @@ do
 
   sed -i 's|API_HOST_NAME|'${API_HOST_NAME}'|g' $file
 done
-
-nginx -g 'daemon off;'
