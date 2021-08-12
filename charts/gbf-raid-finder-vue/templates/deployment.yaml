@@ -62,7 +62,7 @@ spec:
           lifecycle:
             postStart:
               exec:
-                command: ["/bin/sh", "entrypoint.sh"]
+                command: ["./entrypoint.sh"]
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
