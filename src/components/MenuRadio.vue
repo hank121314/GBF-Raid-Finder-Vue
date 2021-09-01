@@ -1,6 +1,6 @@
 <template>
 	<Menu as="div" class="relative inline-block text-left">
-		<MenuButton>
+		<MenuButton @click.stop>
 			<button aria-label="menu-radio-icon-button" v-wave class="rounded-full px-2 py-2">
 				<slot name="icon" />
 			</button>
@@ -26,6 +26,7 @@
 					shadow-lg
 					ring-1 ring-white ring-opacity-5
 					focus:outline-none
+					z-50
 				"
 			>
 				<div>
@@ -33,7 +34,7 @@
 						<button
 							v-wave
 							class="group flex items-center justify-between w-full px-2 py-2 text-md"
-							@click="onClick(index)"
+							@click.stop="onClick(index)"
 						>
 							<div
 								class="

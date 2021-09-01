@@ -1,7 +1,7 @@
 <template>
 	<Menu as="div" class="relative inline-block text-left">
-		<MenuButton>
-			<button aria-label="menu-list-icon-button" v-wave class="rounded-full px-2 py-2">
+		<MenuButton @click.stop>
+			<button v-wave aria-label="menu-list-icon-button" class="rounded-full px-2 py-2">
 				<slot name="icon" />
 			</button>
 		</MenuButton>
@@ -25,6 +25,7 @@
 					shadow-lg
 					ring-1 ring-white ring-opacity-5
 					focus:outline-none
+					z-50
 				"
 			>
 				<div v-for="(subItems, index) in items" :key="index">
@@ -32,7 +33,7 @@
 						<button
 							v-wave
 							class="group flex items-center justify-between w-full px-2 py-2 text-md"
-							@click="onClick(item)"
+							@click.stop="onClick(item)"
 						>
 							<component :is="item.icon" class="w-6 h-6 text-white mr-4" />
 							<p class="text-white font-sans whitespace-nowrap">
