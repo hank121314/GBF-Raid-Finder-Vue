@@ -1,7 +1,9 @@
 declare module "@heroicons/vue/solid" {
 	export { default as AdjustmentsIcon } from "@heroicons/vue/solid/esm/AdjustmentsIcon.js"
+	export { default as ChevronUpIcon } from "@heroicons/vue/outline/esm/ChevronUpIcon"
 	export { default as ChevronDownIcon } from "@heroicons/vue/solid/esm/ChevronDownIcon.js"
 	export { default as ChevronRightIcon } from "@heroicons/vue/solid/esm/ChevronRightIcon.js"
+	export { default as ChevronDoubleUpIcon } from "@heroicons/vue/solid/esm/ChevronDoubleUpIcon.js"
 	export { default as ChevronDoubleDownIcon } from "@heroicons/vue/solid/esm/ChevronDoubleDownIcon.js"
 	export { default as ChevronLeftIcon } from "@heroicons/vue/solid/esm/ChevronLeftIcon.js"
 	export { default as HeartIcon } from "@heroicons/vue/solid/esm/HeartIcon.js"
@@ -18,5 +20,6 @@ declare module "@heroicons/vue/outline" {
 	export { default as BanIcon } from "@heroicons/vue/outline/esm/BanIcon.js"
 	export { default as SwitchHorizontalIcon } from "@heroicons/vue/outline/esm/SwitchHorizontalIcon.js"
 	export { default as XCircleIcon } from "@heroicons/vue/outline/esm/XCircleIcon.js"
-	export {default as ClipboardCheckIcon} from "@heroicons/vue/outline/esm/ClipboardCheckIcon"
+	export { default as ClipboardCheckIcon } from "@heroicons/vue/outline/esm/ClipboardCheckIcon"
+
 }
