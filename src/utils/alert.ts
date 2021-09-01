@@ -18,7 +18,7 @@ export const infoToast = (message: string): void =>
 		toastBackgroundColor: "#6B7280",
 		transition: "slide",
 		hideProgressBar: true,
-		timeout: 1500
+		timeout: 1000
 	})
 
 export const failToast = (message: string): void =>
