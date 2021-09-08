@@ -1,6 +1,6 @@
 <template>
 	<Menu as="div" class="relative inline-block text-left">
-		<MenuButton @click.stop>
+		<MenuButton @click.stop="dummy">
 			<button v-wave aria-label="menu-list-icon-button" class="rounded-full px-2 py-2">
 				<slot name="icon" />
 			</button>
@@ -76,8 +76,11 @@ export default defineComponent({
 		const onClick = (item: MenuItemProps) => {
 			emit("click", item)
 		}
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		const dummy = () => {}
 
 		return {
+			dummy,
 			onClick
 		}
 	}

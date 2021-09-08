@@ -89,7 +89,7 @@
 						/>
 					</template>
 				</menu-list>
-				<DisclosureButton @click.stop>
+				<DisclosureButton @click.stop="dummy">
 					<button v-if="!open" class="flex items-center justify-center w-full h-6">
 						<ChevronDoubleDownIcon
 							class="w-6 h-6"
@@ -304,9 +304,13 @@ export default defineComponent({
 			}
 		)
 
+		// eslint-disable-next-line @typescript-eslint/no-empty-function
+		const dummy = () => {}
+
 		return {
 			tweetCLass,
 			copied,
+			dummy,
 			hoverHeader,
 			notificationItems,
 			items,

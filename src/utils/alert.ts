@@ -1,6 +1,6 @@
 import { createToast } from "mosha-vue-toastify"
 
-export const successToast = (message: string): void =>
+export const successToast = (message: string): void => {
 	createToast(message, {
 		type: "success",
 		showIcon: true,
@@ -9,8 +9,9 @@ export const successToast = (message: string): void =>
 		showCloseButton: false,
 		timeout: 2000
 	})
+}
 
-export const infoToast = (message: string): void =>
+export const infoToast = (message: string): void => {
 	createToast(message, {
 		type: "info",
 		showIcon: true,
@@ -20,8 +21,9 @@ export const infoToast = (message: string): void =>
 		hideProgressBar: true,
 		timeout: 1000
 	})
+}
 
-export const failToast = (message: string): void =>
+export const failToast = (message: string): void => {
 	createToast(message, {
 		type: "danger",
 		showIcon: true,
@@ -29,3 +31,4 @@ export const failToast = (message: string): void =>
 		hideProgressBar: true,
 		timeout: 2000
 	})
+}
