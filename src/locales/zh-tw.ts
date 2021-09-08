@@ -16,7 +16,12 @@ export default {
 		off: "關閉",
 		clear: "清除",
 		moveLeft: "向左移",
-		moveRight: "向右移"
+		moveRight: "向右移",
+		moveUp: "向上移",
+		moveDown: "向下移",
+		listType: "列表模式",
+		tweetLists: "推文列表",
+		raidBossLists: "王列表"
 	},
 	messages: {
 		connected: "已連線至伺服器!",

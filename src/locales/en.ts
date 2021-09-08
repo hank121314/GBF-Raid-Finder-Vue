@@ -16,7 +16,12 @@ export default {
 		language: "Language",
 		clear: "Clear",
 		moveLeft: "Move Left",
-		moveRight: "Move Right"
+		moveRight: "Move Right",
+		moveUp: "Move Forward",
+		moveDown: "Move Backward",
+		listType: "List Type",
+		tweetLists: "Tweet List",
+		raidBossLists: "Raid Boss List"
 	},
 	messages: {
 		connected: "Connected to server!",
@@ -25,7 +30,7 @@ export default {
 		copySuccess: "Copied!"
 	},
 	notifications: {
-		none: 'None',
+		none: "None",
 		bell: "Bell",
 		xylophone: "Xylophone"
 	},

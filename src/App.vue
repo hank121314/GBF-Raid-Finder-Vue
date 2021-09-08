@@ -8,28 +8,28 @@
 			<environment />
 		</template>
 	</settings>
-	<tweet-lists />
+	<component :is="ListComponent" />
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, watch, onUnmounted } from "vue"
+import { defineComponent, ref, onMounted, watch, computed, onUnmounted } from "vue"
 import { useI18n } from "vue-i18n"
 import isEmpty from "lodash/isEmpty"
 import without from "lodash/without"
 import globalI18n from "@/locales"
-import { SettingsTab } from "@/configs"
+import { ListMode, SettingsTab } from "@/configs"
 import { useStore } from "@/store"
 import { Event, WebsocketEvents } from "@/services/websocket"
 import Players from "@/services/players"
 import WSWorker from "@/threads/websocket?worker"
 import { FAB } from "@/components"
-import { Settings, BossList, Environment, TweetLists } from "@/pages"
+import { Settings, BossList, Environment, TweetLists, RaidBossLists } from "@/pages"
 import TweetsType from "@/store/tweets/types"
 import { successToast, failToast } from "@/utils/alert"
 
 export default defineComponent({
 	name: "App",
-	components: { BossList, Environment, FAB, Settings, TweetLists },
+	components: { BossList, Environment, FAB, Settings },
 	setup() {
 		const store = useStore()
 		let worker: Worker | null = null
@@ -90,6 +90,17 @@ export default defineComponent({
 			}
 		)
 
+		const ListComponent = computed(() => {
+			switch (store.state.configs.mode) {
+				case ListMode.TWEET:
+					return TweetLists			
+				case ListMode.BOSS:
+					return RaidBossLists
+				default:
+					return TweetLists
+			}
+		})
+
 		const isSettingsOpen = ref(false)
 
 		const onSettingsOpen = () => {
@@ -102,6 +113,7 @@ export default defineComponent({
 
 		return {
 			SettingsTab,
+			ListComponent,
 			isSettingsOpen,
 			onSettingsOpen,
 			onSettingsClose

@@ -1,42 +1,32 @@
 <template>
 	<div class="overflow-y-auto h-full">
 		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
+			{{ $t("label.listType") }}
+		</p>
+		<RadioButton v-model:selected="mode" :items="modeItems" class="mt-4" />
+		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.timeFormat") }}
 		</p>
-		<RadioButton
-			v-model:selected="timeFormat"
-			:items="timeFormatItems"
-			class="mt-4"
-		/>
+		<RadioButton v-model:selected="timeFormat" :items="timeFormatItems" class="mt-4" />
 		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.showBossImage") }}
 		</p>
-
-		<RadioButton
-			v-model:selected="showBossImage"
-			:items="showBossImageItems"
-			class="mt-4"
-		/>
+		<RadioButton v-model:selected="showBossImage" :items="showBossImageItems" class="mt-4" />
 		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.showUserImage") }}
 		</p>
-
-		<RadioButton
-			v-model:selected="showUserImage"
-			:items="showUserImageItems"
-			class="mt-4"
-		/>
+		<RadioButton v-model:selected="showUserImage" :items="showUserImageItems" class="mt-4" />
 		<p class="text-base font-sans text-white mt-2 ml-4 col-span-1 md:text-lg">
 			{{ $t("label.language") }}
 		</p>
-		<selector v-model:selected="locale" :items="localeItems" />
+		<selector v-model:selected="locale" class="mt-4" :items="localeItems" />
 	</div>
 </template>
 
 <script lang="ts">
 import { defineComponent, computed, ref } from "vue"
 import { useI18n } from "vue-i18n"
-import { Language, TimeFormation } from "@/configs"
+import { Language, ListMode, TimeFormation } from "@/configs"
 import { useStore } from "@/store"
 import ConfigsTypes from "@/store/configs/types"
 import { RadioButton, Selector } from "@/components"
@@ -91,13 +81,21 @@ export default defineComponent({
 			{ label: "English", value: Language.EN }
 		])
 		const locale = computed({
-			get: () =>
-				localeItems.value.findIndex(
-					(l) => l.value === store.state.configs.locale
-				) ?? 0,
+			get: () => localeItems.value.findIndex((l) => l.value === store.state.configs.locale) ?? 0,
 			set: (newValue) => {
 				const selectedLocale = localeItems.value[newValue]?.value ?? Language.EN
 				store.dispatch(ConfigsTypes.SET_LOCALE, selectedLocale)
+			}
+		})
+
+		const modeItems = ref([
+			{ label: i18n.t("label.tweetLists"), value: ListMode.TWEET },
+			{ label: i18n.t("label.raidBossLists"), value: ListMode.BOSS }
+		])
+		const mode = computed({
+			get: () => store.state.configs.mode,
+			set: (newValue) => {
+				store.dispatch(ConfigsTypes.SET_LIST_MODE, newValue)
 			}
 		})
 
@@ -109,7 +107,9 @@ export default defineComponent({
 			showUserImage,
 			showUserImageItems,
 			locale,
-			localeItems
+			localeItems,
+			mode,
+			modeItems
 		}
 	}
 })

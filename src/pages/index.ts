@@ -4,3 +4,5 @@ export const Settings = defineAsyncComponent({ loader: () => import("./Settings.
 export const BossList = defineAsyncComponent({ loader: () => import("./BossList.vue") })
 export const Environment = defineAsyncComponent({ loader: () => import("./Environment.vue") })
 export const TweetLists = defineAsyncComponent({ loader: () => import("./TweetLists/TweetLists.vue") })
+export const RaidBossLists = defineAsyncComponent({ loader: () => import("./RaidBossLists/RaidBossLists.vue") })
+
