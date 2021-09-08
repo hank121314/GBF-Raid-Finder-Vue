@@ -28,7 +28,6 @@ import { useStore } from "@/store"
 import { ListConfiguration, SortPosition, Notifications } from "@/configs"
 import reject from "lodash/reject"
 import isNil from "lodash/isNil"
-import isEmpty from "lodash/isEmpty"
 import { TweetList } from "./components"
 import TweetsTypes from "@/store/tweets/types"
 import ConfigsTypes from "@/store/configs/types"
@@ -105,8 +104,7 @@ export default defineComponent({
 			onClickResetWidth,
 			onClickUnfollow,
 			onClickMusic,
-			onCopiedTweet,
-			isEmpty
+			onCopiedTweet
 		}
 	}
 })

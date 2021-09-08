@@ -34,14 +34,14 @@
 				{{ tweet.screen_name }}
 			</p>
 			<p class="w-full text-white text-xs text-right font-sans md:text-sm" :class="{ 'text-gray-500': tweet.copied }">
-				{{ formatTime(tweet.created, timeFormation) }}
+				{{ time }}
 			</p>
 		</div>
 	</div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue"
+import { defineComponent, PropType, onMounted, onUnmounted } from "vue"
 import { useI18n } from "vue-i18n"
 import Clipboard from "clipboard"
 import { ClipboardCheckIcon } from "@heroicons/vue/outline"
@@ -49,7 +49,7 @@ import { nanoid } from "nanoid"
 import isEmpty from "lodash/isEmpty"
 import { TimeFormation } from "@/configs"
 import { infoToast } from "@/utils/alert"
-import { formatTime } from "@/utils/chrono"
+import { useTime } from "@/utils/composables"
 import type RaidTweet from "@/proto/raid_tweet"
 
 export default defineComponent({
@@ -70,9 +70,17 @@ export default defineComponent({
 		}
 	},
 	emits: ["copied"],
-	setup(_, { emit }) {
+	setup(props, { emit }) {
 		const i18n = useI18n()
 		const tweetClass = `tweet-${nanoid()}`
+		const { start, clear, time } = useTime(props.tweet.created, props.timeFormation)
+
+		onMounted(() => {
+			start()
+		})
+		onUnmounted(() => {
+			clear()
+		})
 
 		const onClickTweet = (tweet: RaidTweet) => {
 			const clipboard = new Clipboard(`.${tweetClass}`)
@@ -87,7 +95,7 @@ export default defineComponent({
 		return {
 			tweetClass,
 			onClickTweet,
-			formatTime,
+			time,
 			isEmpty
 		}
 	}
