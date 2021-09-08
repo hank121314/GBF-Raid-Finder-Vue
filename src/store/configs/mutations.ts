@@ -1,6 +1,6 @@
 import xor from "lodash/xor"
 import omit from "lodash/omit"
-import { SortPosition } from "@/configs"
+import { ListMode, SortPosition } from "@/configs"
 import types from "./types"
 import type { ConfigsState } from "./state"
 import type { Notifications, Language, TimeFormation } from "@/configs"
@@ -15,6 +15,7 @@ export type ConfigsMutations<S = ConfigsState> = {
 	[types.TOGGLE_SHOW_BOSS_IMAGE](state: S): void
 	[types.TOGGLE_SHOW_USER_IMAGE](state: S): void
 	[types.SET_TIME_FORMATION](state: S, payload: TimeFormation): void
+	[types.SET_LIST_MODE](state: S, payload: ListMode): void
 }
 
 const mutations: ConfigsMutations = {
@@ -64,6 +65,9 @@ const mutations: ConfigsMutations = {
 	},
 	[types.SET_TIME_FORMATION](state, payload) {
 		state.timeFormation = payload
+	},
+	[types.SET_LIST_MODE](state, payload) {
+		state.mode = payload
 	}
 }
 

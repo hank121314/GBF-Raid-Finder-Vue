@@ -35,6 +35,11 @@ export enum Language {
 	ZH_TW = "zh-TW"
 }
 
+export enum ListMode {
+	TWEET = "TWEET",
+	BOSS = "BOSS",
+}
+
 export const ListConfiguration = {
 	width: isMobile ? window.screen.width - 32 : 320,
 	minWidth: 220,

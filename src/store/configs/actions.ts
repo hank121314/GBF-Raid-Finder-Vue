@@ -1,7 +1,7 @@
 import types from "./types"
 import type { ActionTree } from "vuex"
 import type { RootState } from "@/store"
-import type { Language, TimeFormation, SortPosition, Notifications } from "@/configs"
+import type { Language, TimeFormation, SortPosition, Notifications, ListMode } from "@/configs"
 import type { ConfigsState } from "./state"
 import type { ConfigsMutations } from "./mutations"
 
@@ -29,6 +29,10 @@ export type ConfigsActions<S = ConfigsState, R = RootState> = {
 	[types.SET_TIME_FORMATION](
 		context: vuex.Context<S, types.SET_TIME_FORMATION, ConfigsMutations, R>,
 		payload: TimeFormation
+	): void
+	[types.SET_LIST_MODE](
+		context: vuex.Context<S, types.SET_LIST_MODE, ConfigsMutations, R>,
+		payload: ListMode
 	): void
 } & ActionTree<S, R>
 
@@ -59,6 +63,9 @@ const actions: ConfigsActions = {
 	},
 	[types.SET_TIME_FORMATION]({ commit }, payload) {
 		commit(types.SET_TIME_FORMATION, payload)
+	},
+	[types.SET_LIST_MODE]({ commit }, payload) {
+		commit(types.SET_LIST_MODE, payload)
 	}
 }
 

@@ -1,4 +1,4 @@
-import { TimeFormation } from "@/configs"
+import { TimeFormation, ListMode } from "@/configs"
 import type { Language, Notifications } from "@/configs"
 
 export type ConfigsState = {
@@ -9,6 +9,7 @@ export type ConfigsState = {
 	showBossImage: boolean
 	showUserImage: boolean
 	timeFormation: TimeFormation
+	mode: ListMode
 }
 
 const state: ConfigsState = {
@@ -18,7 +19,8 @@ const state: ConfigsState = {
 	locale: navigator.language as Language,
 	showBossImage: false,
 	showUserImage: false,
-	timeFormation: TimeFormation.Relative
+	timeFormation: TimeFormation.Relative,
+	mode: ListMode.TWEET
 }
 
 export default state
