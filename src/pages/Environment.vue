@@ -88,7 +88,7 @@ export default defineComponent({
 			}
 		})
 
-		const modeItems = ref([
+		const modeItems = computed(() => [
 			{ label: i18n.t("label.tweetLists"), value: ListMode.TWEET },
 			{ label: i18n.t("label.raidBossLists"), value: ListMode.BOSS }
 		])
