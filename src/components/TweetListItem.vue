@@ -41,12 +41,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, onMounted, onUnmounted } from "vue"
+import { defineComponent, PropType, onMounted, onUnmounted, watch } from "vue"
 import { useI18n } from "vue-i18n"
 import Clipboard from "clipboard"
 import { ClipboardCheckIcon } from "@heroicons/vue/outline"
 import { nanoid } from "nanoid"
 import isEmpty from "lodash/isEmpty"
+import globalI18n from "@/locales"
 import { TimeFormation } from "@/configs"
 import { infoToast } from "@/utils/alert"
 import { useTime } from "@/utils/composables"
@@ -81,6 +82,14 @@ export default defineComponent({
 		onUnmounted(() => {
 			clear()
 		})
+
+		watch(
+			() => globalI18n.global.locale.value,
+			() => {
+				clear()
+				start()
+			}
+		)
 
 		const onClickTweet = (tweet: RaidTweet) => {
 			const clipboard = new Clipboard(`.${tweetClass}`)
