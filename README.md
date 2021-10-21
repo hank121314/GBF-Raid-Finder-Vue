@@ -5,6 +5,8 @@
 
 [DockerHub](https://hub.docker.com/r/hank121314/gbf-raid-finder-vue)
 
+Front-end for [hank121314/GBF-Raid-Finder-RS](https://github.com/hank121314/GBF-Raid-Finder-RS)
+
 ### Features
 
 - Responsive web design
